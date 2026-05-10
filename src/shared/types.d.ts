@@ -238,7 +238,7 @@ type Tab = {
 type Dropdown = {
   options: Tab[];
   activeTab: number;
-  onActiveTabSelected: Function;
+  onActiveTabSelected: (index: number) => void;
   iconUp?: ReactElement;
   iconDown?: ReactElement;
 };

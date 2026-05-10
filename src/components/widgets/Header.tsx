@@ -15,7 +15,7 @@
     
     const { links, actions, isSticky, showToggleTheme, showRssFeed, position } = headerData;
 
-    const ref = useRef(null);
+    const ref = useRef<HTMLUListElement | null>(null);
 
     const updatedIsDropdownOpen =
       links &&
