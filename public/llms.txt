@@ -1,0 +1,43 @@
+# Hossam Honda Maintenance Center
+
+> Specialized in professional Honda car maintenance, original spare parts, ADAS radar calibration, OBD diagnostics, and AC gas refilling in Amman, Jordan.
+
+## Core Information
+- **Name**: Hossam Honda Maintenance Center / مركز حسام لصيانة هوندا
+- **Address**: Al-Shahid Road, Amman, Jordan (شارع الشهيد، عمان، الأردن)
+- **Phone & WhatsApp**: +962 7 9799 6020 / +962 7 9532 8713
+- **Working Hours**: Sunday - Thursday: 09:00 AM - 06:00 PM (Friday Closed)
+
+## Main Page Directory (English)
+- [Home](https://housam-honda.com/en): Overview of our Honda auto care center, specialized services, and client testimonials.
+- [Services Catalog](https://housam-honda.com/en/services): Description of our top 6 specialized automotive services.
+- [About Us](https://housam-honda.com/en/about): Our 30+ year history, mission, expertise, and mechanic certifications.
+- [Contact Us](https://housam-honda.com/en/contact): Business hours, direct phone/WhatsApp numbers, and map iframe location.
+- [Servicing Plans & Pricing](https://housam-honda.com/en/pricing): Maintenance package quotes (Minor Service, Major Service, Calibration).
+- [FAQs](https://housam-honda.com/en/faqs): Common questions regarding parts, scheduling, and service warranties.
+- [Blog & Articles](https://housam-honda.com/en/blog): Technical guides on Honda Sensing calibration, ECU flashing, and cooling system care.
+
+## Automotive Services (English Detail Pages)
+- [AC Gas Refill & Service](https://housam-honda.com/en/services/AC-Gas-Service): Certified AC refrigerant recharging (R134a/R1234yf), vacuum test, and leak diagnostics.
+- [Car Computer Diagnostic](https://housam-honda.com/en/services/Car-Computer-Diagnostic): OBD engine scans, fault code analysis, and electronics troubleshooting.
+- [Computer Software Update](https://housam-honda.com/en/services/Computer-Software-Update): Official Honda factory ECU/TCU updates and programming.
+- [Maintenance & Repair](https://housam-honda.com/en/services/Maintenance): Routine maintenance, engine repair, transmission services, and electrics.
+- [Radar & ADAS Calibration](https://housam-honda.com/en/services/Radar-Calibration): Advanced calibration of Honda Sensing radars and windshield cameras.
+- [Genuine Spare Parts](https://housam-honda.com/en/services/Spare-Parts): Original Honda parts, Bosch components, and high-quality catalog alternatives.
+
+## Main Page Directory (Arabic)
+- [الرئيسية](https://housam-honda.com/ar): نظرة عامة على مركز صيانة هوندا المتخصص والخدمات وتقييمات العملاء.
+- [خدماتنا](https://housam-honda.com/ar/services): دليل أهم 6 خدمات صيانة نقدمها لسيارات هوندا.
+- [من نحن](https://housam-honda.com/ar/about): تاريخ المركز وخبرته التي تمتد لأكثر من 30 عاماً في عمان.
+- [اتصل بنا](https://housam-honda.com/ar/contact): أرقام التواصل والواتساب المباشر وخريطة الموقع الجغرافي.
+- [باقات الأسعار](https://housam-honda.com/ar/pricing): تقديرات أسعار باقات صيانة المحرك والفرامل والمعايرة.
+- [الأسئلة الشائعة](https://housam-honda.com/ar/faqs): إجابات لأبرز الأسئلة الشائعة حول قطع الغيار والضمان والمواعيد.
+- [المقالات والمدونة](https://housam-honda.com/ar/blog): نصائح فنية متخصصة حول صيانة رادارات وجير ومكيف سيارات هوندا.
+
+## Automotive Services (Arabic Detail Pages)
+- [تعبئة غاز وصيانة المكيف](https://housam-honda.com/ar/services/AC-Gas-Service): شحن غاز الفريون الأصلي وفحص تسريب دورة التكييف لسيارات هوندا.
+- [فحص كمبيوتر السيارة](https://housam-honda.com/ar/services/Car-Computer-Diagnostic): قراءة أكواد الأعطال وتشخيص الأنظمة الإلكترونية والحساسات.
+- [تحديث برمجيات السيارة](https://housam-honda.com/ar/services/Computer-Software-Update): تحديث برمجيات كمبيوتر هوندا والـ ECU الرسمي وإعادة التهيأة.
+- [الصيانة العامة](https://housam-honda.com/ar/services/Maintenance): صيانة ميكانيكية وكهربائية وفحص نظام الفرامل والزيوت.
+- [معايرة الرادار](https://housam-honda.com/ar/services/Radar-Calibration): معايرة رادار وكاميرات أمان هوندا Sensing بدقة متناهية.
+- [قطع الغيار](https://housam-honda.com/ar/services/Spare-Parts): توفير قطع غيار هوندا الأصلية وبدائل بوش عالية الجودة.

@@ -3,6 +3,22 @@ import Headline from '../common/Headline';
 import { ContactProps } from '~/shared/types';
 import WidgetWrapper from '../common/WidgetWrapper';
 
+const renderDescriptionLine = (line: any) => {
+  if (typeof line !== 'string') return line;
+  const phoneRegex = /(07\s\d{4}\s\d{4}|07\s\d{3}\s\d{4})/g;
+  const parts = line.split(phoneRegex);
+  return parts.map((part, i) => {
+    if (/(07\s\d{4}\s\d{4}|07\s\d{3}\s\d{4})/.test(part)) {
+      return (
+        <span key={i} dir="ltr" className="inline-block">
+          {part}
+        </span>
+      );
+    }
+    return part;
+  });
+};
+
 const Contact = ({ header, content, items, image, id, hasBackground = false, form }: ContactProps) => (
   <WidgetWrapper id={id ? id : ''} hasBackground={hasBackground} containerClass="max-w-6xl">
     {header && <Headline header={header} titleClass="text-3xl sm:text-5xl" />}
@@ -23,11 +39,11 @@ const Contact = ({ header, content, items, image, id, hasBackground = false, for
                   {Array.isArray(description) ? (
                     description.map((descLine, lineIndex) => (
                       <p key={`text-description-${lineIndex}`} className="text-gray-600 dark:text-slate-400">
-                        {descLine}
+                        {renderDescriptionLine(descLine)}
                       </p>
                     ))
                   ) : (
-                    <p className="text-gray-600 dark:text-slate-400">{description}</p>
+                    <p className="text-gray-600 dark:text-slate-400">{renderDescriptionLine(description)}</p>
                   )}
                 </div>
               </li>

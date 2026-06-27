@@ -1,9 +1,10 @@
 import { footerData2 } from '~/shared/data/global.data';
 import Image from 'next/image';
 import Logo from '../atoms/Logo';
+import { FooterProps } from '~/shared/types';
 
 const Footer2 = () => {
-  const { links, columns, socials, footNote } = footerData2;
+  const { links, columns, socials, footNote } = footerData2 as FooterProps;
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6">

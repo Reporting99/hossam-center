@@ -1,7 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
-import { announcementData } from '~/shared/data/global.data';
+import { getGlobalData } from '~/shared/data/global.data';
 
-const Announcement = () => {
+interface AnnouncementProps {
+  lang: string;
+}
+
+const Announcement = ({ lang }: AnnouncementProps) => {
+  const { announcementData } = getGlobalData(lang);
   const { title, callToAction, callToAction2 } = announcementData;
 
   return (
@@ -10,8 +14,6 @@ const Announcement = () => {
       {callToAction && callToAction.text && callToAction.href && (
         <a
           href={callToAction.href}
-          target="_blank"
-          rel="noreferrer noopened"
           className="cursor-pointer text-gray-100 hover:underline"
         >
           {callToAction.icon && <callToAction.icon className="mr-1 -ml-1.5 h-5 w-5" />} {callToAction.text}
@@ -38,3 +40,4 @@ const Announcement = () => {
 };
 
 export default Announcement;
+

@@ -200,7 +200,7 @@ type Price = {
   title?: string;
   subtitle?: string;
   description?: string;
-  price?: number;
+  price?: number | string;
   period?: string;
   items?: Array<Item>;
   callToAction?: CallToActionType;
@@ -390,7 +390,7 @@ type ContactProps = Widget & {
   items?: Array<Item>;
   form?: FormProps;
   image?: {
-    src: string;
+    src: string | StaticImageData;
     alt: string;
   };
 };

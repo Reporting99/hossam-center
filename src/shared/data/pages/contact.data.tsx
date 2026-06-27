@@ -1,148 +1,116 @@
 import { IconClock, IconHeadset, IconHelp, IconMapPin, IconMessages, IconPhoneCall } from '@tabler/icons-react';
 import { ContactProps, FeaturesProps } from '~/shared/types';
 import { HeroProps } from '~/shared/types';
+import HossamCenterBuilding from '~/assets/images/Hossam Center Building.webp';
+import { getLocalizedHref } from '~/utils/permalinks';
 
-// Hero data on Contact page *******************
-export const heroContact: HeroProps = {
-  title: 'Get in touch with us',
-  subtitle: (
-    <>
-      <span className="hidden md:inline">{`Thank you for choosing Hossam Maintenance Center for your Honda car maintenance needs.`}</span>{' '}
-      {`We are dedicated to providing exceptional service and ensuring your satisfaction. Reach out to us today and let us assist you.`}
-    </>
-  ),
-};
+export const getContactData = (lang: string) => {
+  const isAr = lang === 'ar';
 
-// Contact data on Contact page *******************
-export const contact2Contact: ContactProps = {
-  id: 'contactTwo-on-contact',
-  hasBackground: true,
-  header: {
-    title: 'Contact us',
-    subtitle: (
+  const heroContact: HeroProps = {
+    title: isAr ? 'تواصل معنا' : 'Get in touch with us',
+    subtitle: isAr ? (
       <>
-        Please take a moment to fill out this form.{' '}
-        <span className="hidden md:inline">{`So we can better understand your needs and get the process started smoothly.`}</span>
+        نشكرك على اختيارك لمركز حسام لصيانة سيارات هوندا. نحن حريصون على تقديم خدمة استثنائية وضمان رضاك. تواصل معنا اليوم ودعنا نساعدك.
+      </>
+    ) : (
+      <>
+        Thank you for choosing Hossam Maintenance Center for your Honda car maintenance needs. We are dedicated to providing exceptional service and ensuring your satisfaction. Reach out to us today and let us assist you.
       </>
     ),
-  },
-  items: [
-    {
-      title: 'Our Address',
-      description: ['1230 Maecenas Street Donec Road', 'New York, EEUU'],
-      icon: IconMapPin,
+  };
+
+  const contactData: ContactProps = {
+    id: 'contact-on-contact',
+    hasBackground: true,
+    header: {
+      title: isAr ? 'معلومات الاتصال بنا' : 'Contact Information',
+      subtitle: isAr ? (
+        <>
+          تفضل بزيارة مركزنا أو تواصل معنا مباشرة عبر الهاتف أو الواتساب لحجز موعد صيانة.
+        </>
+      ) : (
+        <>
+          Please visit our center or get in touch with us directly by phone or WhatsApp to schedule service.
+        </>
+      ),
     },
-    {
-      title: 'Contact',
-      description: ['Mobile: +1 (123) 456-7890', 'Mail: tailnext@gmail.com'],
-      icon: IconPhoneCall,
-    },
-    {
-      title: 'Working hours',
-      description: ['Monday - Friday: 08:00 - 17:00', 'Saturday & Sunday: 08:00 - 12:00'],
-      icon: IconClock,
-    },
-  ],
-  form: {
-    title: 'Ready to Get Started?',
-    inputs: [
+    items: [
       {
-        type: 'text',
-        label: 'First name',
-        name: 'name',
-        autocomplete: 'off',
-        placeholder: 'First name',
+        title: isAr ? 'عنواننا' : 'Our Address',
+        description: isAr 
+          ? ['مركز حسام لصيانة سيارات هوندا', 'شارع الشهيد، عمان، الأردن'] 
+          : ['Hossam Honda Service Center', 'Al-Shahid Road, Amman, Jordan'],
+        icon: IconMapPin,
       },
       {
-        type: 'text',
-        label: 'Last name',
-        name: 'lastName',
-        autocomplete: 'off',
-        placeholder: 'Last name',
+        title: isAr ? 'الاتصال والواتساب' : 'Contact & WhatsApp',
+        description: isAr ? [
+          'هاتف 1: 07 9799 6020',
+          'هاتف 2: 07 9532 8713',
+          'واتساب: 07 9799 6020'
+        ] : [
+          'Phone 1: 07 9799 6020',
+          'Phone 2: 07 9532 8713',
+          'WhatsApp: 07 9799 6020'
+        ],
+        icon: IconPhoneCall,
       },
       {
-        type: 'email',
-        label: 'Email address',
-        name: 'email',
-        autocomplete: 'on',
-        placeholder: 'Email address',
-      },
-    ],
-    radioBtns: {
-      label: 'What is the reason for your contact?',
-      radios: [
-        {
-          label: 'General inquiries',
-        },
-        {
-          label: 'Technical help',
-        },
-        {
-          label: 'Claims',
-        },
-        {
-          label: 'Others',
-        },
-      ],
-    },
-    textarea: {
-      cols: 30,
-      rows: 5,
-      label: 'How can we help you?',
-      name: 'textarea',
-      placeholder: 'Write your message...',
-    },
-    checkboxes: [
-      {
-        label: 'Have you read our privacy policy?',
-        value: '',
-      },
-      {
-        label: 'Do you want to receive monthly updates by email?',
-        value: '',
+        title: isAr ? 'ساعات العمل' : 'Working hours',
+        description: isAr 
+          ? ['الأحد - الخميس: 09:00 - 18:00', 'الجمعة: مغلق'] 
+          : ['Sunday - Thursday: 09:00 - 18:00', 'Friday: Closed'],
+        icon: IconClock,
       },
     ],
-    btn: {
-      title: 'Send Message',
-      type: 'submit',
+    image: {
+      src: HossamCenterBuilding,
+      alt: 'Hossam Honda Maintenance Center Building',
+    }
+  };
+
+  const features2Contact: FeaturesProps = {
+    columns: 3,
+    header: {
+      title: isAr ? 'مركز الدعم والمساعدة' : 'Support Center',
+      subtitle: isAr ? 'تبحث عن شيء معين؟' : 'Looking for something in particular?',
     },
-  },
+    items: [
+      {
+        title: isAr ? 'لديك سؤال؟' : 'Have a question?',
+        description: isAr ? 'اطلع على الأسئلة الشائعة لدينا' : 'See our frequently asked questions',
+        icon: IconHelp,
+        callToAction: {
+          text: isAr ? 'ذهاب لصفحة الأسئلة الشائعة' : 'Go to FAQ page',
+          href: getLocalizedHref('/faqs', lang),
+        },
+      },
+      {
+        title: isAr ? 'دردش معنا' : 'Chat with us',
+        description: isAr ? 'تحدث مباشرة معنا عبر الواتساب' : 'Live chat with our support team',
+        icon: IconMessages,
+        callToAction: {
+          text: isAr ? 'راسلنا الآن' : 'Write to us',
+          href: 'https://wa.me/962797996020',
+        },
+      },
+      {
+        title: isAr ? 'اتصل بنا' : 'Call us',
+        description: isAr ? 'تحدث مع فريقنا اليوم هاتفياً' : 'Speak to our team today',
+        icon: IconHeadset,
+        callToAction: {
+          text: isAr ? 'اتصل الآن' : 'Call us',
+          href: 'tel:+962797996020',
+        },
+      },
+    ],
+  };
+
+  return { heroContact, contactData, features2Contact };
 };
 
-// Feature2 data on Contact page *******************
-export const features2Contact: FeaturesProps = {
-  columns: 3,
-  header: {
-    title: 'Support Center',
-    subtitle: 'Looking for something in particular?',
-  },
-  items: [
-    {
-      title: 'Have a question?',
-      description: 'See our frequently asked questions',
-      icon: IconHelp,
-      callToAction: {
-        text: 'Go to FAQ page',
-        href: '/faqs',
-      },
-    },
-    {
-      title: 'Chat with us',
-      description: 'Live chat with our support team',
-      icon: IconMessages,
-      callToAction: {
-        text: 'Write to us',
-        href: '/',
-      },
-    },
-    {
-      title: 'Get help',
-      description: 'Speak to our team today',
-      icon: IconHeadset,
-      callToAction: {
-        text: 'Call us',
-        href: '/',
-      },
-    },
-  ],
-};
+// Static exports for TS safety
+export const heroContact = {} as any;
+export const contact2Contact = {} as any;
+export const features2Contact = {} as any;

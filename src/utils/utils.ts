@@ -17,3 +17,18 @@ export const getSuffixNumber = (number: number, digits: number = 1): string => {
     .find((item) => number >= item.value);
   return lookupItem ? (number / lookupItem.value).toFixed(digits).replace(rx, '$1') + lookupItem.symbol : '0';
 };
+
+import { SITE } from '~/config.js';
+
+export const getAlternates = (lang: string, path: string = '') => {
+  const cleanPath = path ? (path.startsWith('/') ? path : `/${path}`) : '';
+  const cleanOrigin = SITE.origin.endsWith('/') ? SITE.origin.slice(0, -1) : SITE.origin;
+  
+  return {
+    canonical: `${cleanOrigin}/${lang}${cleanPath}`,
+    languages: {
+      en: `${cleanOrigin}/en${cleanPath}`,
+      ar: `${cleanOrigin}/ar${cleanPath}`,
+    },
+  };
+};

@@ -35,7 +35,7 @@ const LOGOS = [
 
 export const InfiniteSlider = () => {
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden" dir="ltr">
       {/* Main slider div */}
       <div className="animate-infinite-slider flex">
         {LOGOS.map((logo, index) => (

@@ -2,6 +2,22 @@ import { twMerge } from 'tailwind-merge';
 import type { ItemGrid as ItemGridType } from '~/shared/types';
 import CTA from './CTA';
 
+const renderDescriptionLine = (line: any) => {
+  if (typeof line !== 'string') return line;
+  const phoneRegex = /(07\s\d{4}\s\d{4}|07\s\d{3}\s\d{4})/g;
+  const parts = line.split(phoneRegex);
+  return parts.map((part, i) => {
+    if (/(07\s\d{4}\s\d{4}|07\s\d{3}\s\d{4})/.test(part)) {
+      return (
+        <span key={i} dir="ltr" className="inline-block">
+          {part}
+        </span>
+      );
+    }
+    return part;
+  });
+};
+
 const ItemGrid = ({
   id,
   items,
@@ -45,11 +61,17 @@ const ItemGrid = ({
                 <div className="mt-0.5">
                   {title && <h3 className={twMerge('text-xl font-bold', titleClass)}>{title}</h3>}
                   {description && (
-                    <p
+                    <div
                       className={twMerge(`text-gray-600 dark:text-slate-400 ${title ? 'mt-3' : ''}`, descriptionClass)}
                     >
-                      {description}
-                    </p>
+                      {Array.isArray(description) ? (
+                        description.map((descLine, lineIndex) => (
+                          <p key={`text-description-${lineIndex}`}>{renderDescriptionLine(descLine)}</p>
+                        ))
+                      ) : (
+                        <p>{renderDescriptionLine(description)}</p>
+                      )}
+                    </div>
                   )}
                   {callToAction && (
                     <CTA

@@ -37,3 +37,34 @@
 .animate-fadeInUp {
   animation: fadeInUp 0.5s ease-in-out both;
 }
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dc2626; /* Red brand color */
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b91c1c; /* Darker red hover */
+}
+
+/* Firefox Support */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #dc2626 transparent;
+}
+
+/* Hide floating actions when mobile menu is open */
+body.mobile-menu-open [data-floating-actions] {
+  display: none !important;
+}
+

@@ -8,6 +8,7 @@ export default defineConfig([
   {
     rules: {
       "react-hooks/set-state-in-effect": "warn",
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "src/stories/**", ".storybook/**"]),

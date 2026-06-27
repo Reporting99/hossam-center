@@ -1,135 +1,140 @@
-import { IconAddressBook } from '@tabler/icons-react';
 import { CallToActionProps, FAQsProps, HeroProps } from '~/shared/types';
 
-// Hero data for Car Computer Diagnostic page
-export const heroCarDiagnostic: HeroProps = {
-  title: 'Car Computer Diagnostic',
-  subtitle: 'Advanced Smart diagnostics tool and computer diagnostic services to keep your vehicle running efficiently.',
-  tagline: 'Reliable Diagnostics at Hossam Center',
-  callToAction: {
-    text: 'Book a Service',
-    href: '/contact',
-    icon: IconAddressBook,
-    targetBlank: false,
-  },
-  callToAction2: {
-    text: 'Learn more',
-    href: '/about',
-  },
-  videoSrc: '/videos/Car Computer Diagnostic hero cover.mp4',
-};
+export const getCarComputerDiagnosticData = (lang: string) => {
+  const isAr = lang === 'ar';
 
-// Stats data for Car Computer Diagnostic page
-export const statsCarDiagnostic = {
-  id: 'stats-car-diagnostic',
-  items: [
-    { title: '30+', description: 'Years of experience in car diagnostics and repair.' },
-    { title: '5000+', description: 'Vehicles diagnosed and serviced successfully.' },
-    { title: '100%', description: 'Commitment to quality and customer satisfaction.' },
-  ],
-};
-
-// Car Diagnostic Content
-export const carCodeReaderContent = `
-Hossam Center uses advanced car Smart diagnostics tool devices to identify any problems with your vehicle. 
-Using a car Smart diagnostics tool, our technicians can detect issues related to engine performance, transmission, and other essential systems. 
-This effective diagnostic procedure allows us to provide quick and reliable solutions.
-`;
-
-export const autoCodeReaderContent = `
-At Hossam Center, our technicians use advanced auto Smart diagnostics tool equipment to identify and fix issues with your car’s electrical and mechanical systems. 
-By utilizing this equipment, we can quickly find problems and save you money on repairs, ensuring your car operates at its best.
-`;
-
-export const engineCodeReaderContent = `
-Our engine Smart diagnostics tool is an essential tool for solving engine-related issues. 
-Hossam Center accesses the car ECU (engine control unit) through an engine Smart diagnostics tool to find error codes that indicate potential issues. 
-This accurate analysis helps us address problems like poor fuel economy, engine misfires, and malfunctioning emission systems, ensuring optimal engine performance.
-`;
-
-export const carComputerReaderContent = `
-Our car computer reader technology generates precise diagnostic reports for your vehicle’s systems. 
-At Hossam Center, we can identify any irregularities in your vehicle’s performance by reading data from its onboard computer, 
-detecting everything from minor sensor issues to more significant problems. 
-This technology ensures that your vehicle remains safe and efficient.
-`;
-
-// Features data for Car Computer Diagnostic page
-export const featuresCarDiagnostic = {
-  id: 'features-car-diagnostic',
-  header: {
-    title: 'Why Choose Hossam Center for Car Diagnostics?',
-    subtitle: 'We use state-of-the-art tools to identify and solve any issues with your vehicle efficiently.',
-  },
-  items: [
-    { title: 'Advanced Car Smart diagnostics tools', description: 'We use car Smart diagnostics tool to quickly diagnose vehicle issues and provide effective solutions.' },
-    { title: 'Engine Smart diagnostics tool', description: 'Our engine Smart diagnostics tool allows us to diagnose engine-related issues accurately and efficiently.' },
-    { title: 'Car Computer Readers', description: 'Our car computer readers ensure precise diagnostics, helping us fix even the smallest issues in your vehicle.' },
-  ],
-  additionalContent: [
-    { title: 'Car Smart diagnostics tool', description: carCodeReaderContent },
-    { title: 'Auto Smart diagnostics tool', description: autoCodeReaderContent },
-    { title: 'Engine Smart diagnostics tool', description: engineCodeReaderContent },
-    { title: 'Car Computer Smart diagnostics tool', description: carComputerReaderContent },
-  ],
-};
-
-// Steps data for Car Computer Diagnostic page
-export const stepsCarDiagnostic = {
-  id: 'steps-car-diagnostic',
-  items: [
-    { title: 'Initial Consultation', description: 'Discuss any vehicle issues you’ve noticed with our expert technicians.' },
-    { title: 'Full Diagnostic Scan', description: 'We perform a complete diagnostic scan to identify any potential problems.' },
-    { title: 'Service & Repair', description: 'Our technicians provide efficient repair solutions, ensuring your vehicle is back on the road safely.' },
-  ],
-  image: {
-    src: 'https://res.cloudinary.com/dvcfefmys/image/upload/v1727955088/Car_Computer_Diagnostic_q6yprr.webp',  // Replace with the actual image path
-    alt: 'Image of car computer diagnostic service', // Alt text for accessibility
-  },
-};
-
-// FAQs data for Car Computer Diagnostic page
-export const faqsCarDiagnostic: FAQsProps = {
-  id: 'faqs-car-diagnostic',
-  hasBackground: false,
-  header: {
-    title: 'Car Diagnostic FAQs',
-    subtitle: 'Find answers to common questions about our car diagnostic services.',
-    position: 'center',
-  },
-  tabs: [
-    {
-      link: { label: 'General Services', href: '/services' },
-      items: [
-        { title: 'What types of diagnostics do you offer?', description: 'We offer engine diagnostics, car computer diagnostics, Smart diagnostics tool, and more.' },
-        { title: 'How long does a diagnostic take?', description: 'Most diagnostics are completed within 1-2 hours, depending on the complexity of the issue.' },
-        { title: 'What is the benefit of using a Smart diagnostics tool?', description: 'Smart diagnostics tools help us quickly identify vehicle issues, saving time and ensuring accurate repairs.' },
-        { title: 'Do you offer repairs after diagnostics?', description: 'Yes, we provide comprehensive repair services after identifying any issues during diagnostics.' },
-        { title: 'How much does a diagnostic service cost?', description: 'The cost depends on the type of diagnostic service. Contact us for a detailed estimate.' },
-      ],
+  const heroCarDiagnostic: HeroProps = {
+    title: isAr ? 'فحص كمبيوتر سيارات هوندا' : 'Car Computer Diagnostic',
+    subtitle: isAr 
+      ? 'خدمات فحص كمبيوتر ذكية وشاملة للكشف الفوري عن الأعطال وحفظ أداء سيارتك.' 
+      : 'Advanced Smart diagnostics tool and computer diagnostic services to keep your vehicle running efficiently.',
+    tagline: isAr ? 'فحوصات كمبيوتر موثوقة في مركز حسام' : 'Reliable Diagnostics at Hossam Center',
+    callToAction: {
+      text: isAr ? 'احجز فحصاً' : 'Book a Service',
+      href: `/${lang}/contact`,
     },
-  ],
-};
+    callToAction2: {
+      text: isAr ? 'من نحن' : 'Learn more',
+      href: `/${lang}/about`,
+    },
+    videoSrc: '/videos/Car Computer Diagnostic hero cover.mp4',
+  };
 
-// CallToAction data for Car Computer Diagnostic page
-export const contactCarDiagnostic: CallToActionProps = {
-  id: 'call-to-action-car-diagnostic',
-  hasBackground: true,
-  title: 'Need a Car Diagnostic?',
-  subtitle: 'Contact us today to schedule a diagnostic for your vehicle and ensure it is running smoothly.',
-  form: {
-    inputs: [
-      { label: 'Name', type: 'text', placeholder: 'Enter your name' },
-      { label: 'Email', type: 'email', placeholder: 'Enter your email' },
-      { label: 'Message', type: 'textarea', placeholder: 'Describe the issues you’re experiencing' },
+  const statsCarDiagnostic = {
+    id: 'stats-car-diagnostic',
+    items: [
+      { 
+        title: '30+', 
+        description: isAr ? 'عاماً من الخبرة في فحص كمبيوتر السيارات وتشخيصها.' : 'Years of experience in car diagnostics and repair.' 
+      },
+      { 
+        title: '5000+', 
+        description: isAr ? 'سيارة تم فحصها وتشخيصها بنجاح ودقة.' : 'Vehicles diagnosed and serviced successfully.' 
+      },
+      { 
+        title: '100%', 
+        description: isAr ? 'الالتزام بتقديم أدق تقارير الفحص الفني.' : 'Commitment to quality and customer satisfaction.' 
+      },
     ],
-    btn: {
-      title: 'Send Message',
-      type: 'submit',
+  };
+
+  const featuresCarDiagnostic = {
+    id: 'features-car-diagnostic',
+    header: {
+      title: isAr ? 'لماذا تختار مركز حسام لفحص كمبيوتر سيارتك؟' : 'Why Choose Hossam Center for Car Diagnostics?',
+      subtitle: isAr 
+        ? 'نستخدم أحدث أجهزة فحص السيارات الذكية لقراءة وتحليل بيانات الأنظمة الإلكترونية والميكانيكية بدقة.' 
+        : 'We use state-of-the-art tools to identify and solve any issues with your vehicle efficiently.',
     },
-  },
-  callToAction: { text: 'Schedule Now', href: '/contact' },
+    items: [
+      { 
+        title: isAr ? 'أدوات فحص ذكية ومتقدمة' : 'Advanced Smart Diagnostics Tools', 
+        description: isAr 
+          ? 'نستخدم أحدث أجهزة الفحص المتصلة لقراءة كمبيوتر هوندا بدقة متناهية.' 
+          : 'We use car Smart diagnostics tool to quickly diagnose vehicle issues and provide effective solutions.' 
+      },
+      { 
+        title: isAr ? 'فحص كمبيوتر المحرك (ECU)' : 'Engine Diagnostic Scanner', 
+        description: isAr 
+          ? 'قراءة وتفسير أكواد أعطال المحرك وتشخيص مشاكل استهلاك الوقود والانبعاثات.' 
+          : 'Our engine Smart diagnostics tool allows us to diagnose engine-related issues accurately and efficiently.' 
+      },
+      { 
+        title: isAr ? 'تقارير أنظمة المركبة الإلكترونية' : 'Detailed Electronics Scan', 
+        description: isAr 
+          ? 'تحديد المشاكل والأعطال المخفية في أنظمة الأمان والوسائد الهوائية والتكييف والفرامل.' 
+          : 'Our car computer readers ensure precise diagnostics, helping us fix even the smallest issues in your vehicle.' 
+      },
+    ],
+  };
+
+  const stepsCarDiagnostic = {
+    id: 'steps-car-diagnostic',
+    items: [
+      { 
+        title: isAr ? 'الفحص المبدئي والربط' : 'Scanner Connection', 
+        description: isAr 
+          ? 'ربط سيارتك بجهاز الفحص الذكي للوصول إلى وحدات التحكم الإلكترونية.' 
+          : 'Connecting your vehicle to our smart diagnostic scanner to access the ECU.' 
+      },
+      { 
+        title: isAr ? 'تحليل البيانات والأعطال' : 'Data Analysis', 
+        description: isAr 
+          ? 'قراءة الأكواد الحية والتحذيرية وتقديم تقرير فني دقيق عن حالة كل نظام.' 
+          : 'Reading live values and error codes to generate a precise vehicle health report.' 
+      },
+      { 
+        title: isAr ? 'الإصلاح وإعادة الضبط' : 'Repair & Reset', 
+        description: isAr 
+          ? 'تنفيذ الإصلاحات ومسح الأكواد القديمة للتأكد من زوال المشكلة بالكامل.' 
+          : 'Performing the necessary repairs and clearing code faults to confirm vehicle safety.' 
+      },
+    ],
+    image: {
+      src: 'https://res.cloudinary.com/dvcfefmys/image/upload/v1727955088/Car_Computer_Diagnostic_q6yprr.webp',
+      alt: isAr ? 'فحص كمبيوتر هوندا' : 'Image of car computer diagnostic service',
+    },
+  };
+
+  const faqsCarDiagnostic: FAQsProps = {
+    id: 'faqs-car-diagnostic',
+    hasBackground: false,
+    header: {
+      title: isAr ? 'الأسئلة الشائعة حول فحص كمبيوتر السيارات' : 'Car Diagnostic FAQs',
+      subtitle: isAr 
+        ? 'ابحث عن إجابات للأسئلة الشائعة حول خدمات فحص كمبيوتر هوندا لدينا.'
+        : 'Find answers to common questions about our car diagnostic services.',
+      position: 'center',
+    },
+    tabs: [
+      {
+        link: { label: isAr ? 'خدمات فحص الكمبيوتر' : 'Car Diagnostics', href: `/${lang}/services` },
+        items: isAr ? [
+          { title: 'ماذا يكشف فحص كمبيوتر السيارة؟', description: 'يكشف الفحص عن أعطال المحرك، ناقل الحركة (الجير)، الوسائد الهوائية (SRS)، مانع الانزلاق (ABS)، الحساسات، والكهرباء العامة.' },
+          { title: 'كم يستغرق فحص كمبيوتر السيارة؟', description: 'يستغرق الفحص وتوليد التقرير الفني حوالي 30 إلى 60 دقيقة في الظروف العادية.' },
+          { title: 'هل يجب علي الفحص عند ظهور لمبة Check Engine؟', description: 'نعم، ظهور هذه اللمبة يعني وجود كود عطل مسجل في كمبيوتر المحرك يجب قراءته فوراً لتجنب تفاقم المشكلة.' },
+        ] : [
+          { title: 'What does a car diagnostic check reveal?', description: 'It uncovers faults in the engine, transmission, SRS airbag, ABS brake, body electrical, and general sensors.' },
+          { title: 'How long does a diagnostic test take?', description: 'Most computer diagnostic scans and analyses take between 30 and 60 minutes.' },
+          { title: 'Should I scan my car when the Check Engine light is on?', description: 'Yes, the Check Engine light indicates a registered fault code in the ECU that must be scanned immediately to prevent damages.' },
+        ],
+      },
+    ],
+  };
+
+  return {
+    heroCarDiagnostic,
+    statsCarDiagnostic,
+    featuresCarDiagnostic,
+    stepsCarDiagnostic,
+    faqsCarDiagnostic,
+  };
 };
 
-
-
+// Static placeholders for TS compile
+export const heroCarDiagnostic = {} as any;
+export const statsCarDiagnostic = {} as any;
+export const featuresCarDiagnostic = {} as any;
+export const stepsCarDiagnostic = {} as any;
+export const faqsCarDiagnostic = {} as any;
+export const contactCarDiagnostic = {} as any;

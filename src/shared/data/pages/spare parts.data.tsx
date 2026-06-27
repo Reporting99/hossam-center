@@ -1,133 +1,150 @@
-import { IconAddressBook } from '@tabler/icons-react';
 import { CallToActionProps, FAQsProps, HeroProps } from '~/shared/types';
 
-// Hero data for Spare Parts page
-export const herospareparts: HeroProps = {
-  title: 'Honda & Car Spare Parts',
-  subtitle: 'Find high-quality spare parts for Honda and other vehicle models.',
-  tagline: 'Reliable Car Parts at Hossam Center',
-  callToAction: {
-    text: 'Get a Quote',
-    href: '/contact',
-    icon: IconAddressBook,
-    targetBlank: false,
-  },
-  callToAction2: {
-    text: 'Learn more',
-    href: '/about',
-  },
-  videoSrc: '/videos/spare parts hero cover.mp4',
-};
+export const getSparePartsData = (lang: string) => {
+  const isAr = lang === 'ar';
 
-// Stats data for Spare Parts page
-export const statsspareparts = {
-  id: 'stats-honda-spare-parts',
-  items: [
-    { title: '30+', description: 'Years of experience in car spare parts sales and service.' },
-    { title: '5000+', description: 'Satisfied customers with top-quality spare parts.' },
-    { title: '100%', description: 'Commitment to quality and customer satisfaction.' },
-  ],
-};
-
-// Spare Parts Content
-export const carSparesContent = `
-Hossam Center offers a wide range of car spares for various vehicle models, including Honda and others. 
-Whether you need standard components like filters, batteries, or belts, or more specialized parts, 
-we have what you need. Our broad selection ensures that you can find the parts necessary 
-to enhance your vehicle’s safety and performance.
-`;
-
-export const hondaSparesContent = `
-Hossam Center specializes in high-quality spare parts designed to ensure the best performance. 
-Our inventory includes critical components such as brake pads, suspension parts, and electrical modules. 
-Each part is sourced to meet Honda’s high-quality standards, ensuring precise fit and durability.
-`;
-
-export const hondaGenuinePartsContent = `
-Using original parts is essential to extending the life of your Honda. 
-At Hossam Center, we stock a wide range of Honda original parts, 
-ensuring that every replacement meets the exact specifications of your vehicle.
-`;
-
-export const boschPartsContent = `
-In addition to Honda parts, we offer Bosch parts, which are known for their high quality and dependability. 
-Bosch provides a wide selection of components, such as brake systems and fuel injectors. 
-You can rely on our skilled staff to help you find the right Bosch components to enhance the performance of your vehicle.
-`;
-
-// Features data for Spare Parts page
-export const featuresspareparts = {
-  id: 'features-honda-spare-parts',
-  header: {
-    title: 'Why Choose Hossam Center for Spare Parts?',
-    subtitle: 'We provide genuine parts and ensure top performance for your vehicle.',
-  },
-  items: [
-    { title: 'Wide Range of Car Spares', description: 'Find spare parts for various car models, including Honda.' },
-    { title: 'Honda Genuine Parts', description: 'We stock a full range of original Honda parts to maintain your vehicle’s quality and performance.' },
-    { title: 'Bosch Parts', description: 'We also offer high-quality Bosch parts, known for reliability and precision.' },
-  ],
-  additionalContent: [
-    { title: 'Car Spares', description: carSparesContent },
-    { title: 'Honda Spares', description: hondaSparesContent },
-    { title: 'Honda Genuine Parts', description: hondaGenuinePartsContent },
-    { title: 'Bosch Parts', description: boschPartsContent },
-  ],
-};
-
-// Steps data for Spare Parts page
-export const stepsspareparts = {
-  id: 'steps-honda-spare-parts',
-  items: [
-    { title: 'Consultation', description: 'Discuss your spare parts needs with our experts.' },
-    { title: 'Parts Selection', description: 'We help you choose the right parts for your vehicle.' },
-    { title: 'Installation & Service', description: 'We provide professional installation and ensure everything fits perfectly.' },
-  ],
-  image: {
-    src: 'https://res.cloudinary.com/dvcfefmys/image/upload/v1727952606/Honda_spares_ccrshh.webp',  // Replace with the actual image path
-    alt: 'Image of Honda spare parts', // Alt text for accessibility
-  },
-};
-
-// FAQs data for Spare Parts page
-export const faqsspareparts: FAQsProps = {
-  id: 'faqs-honda-spare-parts',
-  hasBackground: false,
-  header: {
-    title: 'Spare Parts FAQs',
-    subtitle: 'Find answers to common questions about our spare parts.',
-    position: 'center',
-  },
-  tabs: [
-    {
-      link: { label: 'General Services', href: '/services' },
-      items: [
-        { title: 'What types of spare parts do you offer?', description: 'We offer a wide range of parts for Honda and other vehicle models.' },
-        { title: 'Are your Honda parts genuine?', description: 'Yes, we stock only genuine Honda parts for quality and durability.' },
-        { title: 'Do you provide installation services?', description: 'Yes, we offer professional installation for all the parts we sell.' },
-        { title: 'How can I order spare parts?', description: 'You can contact us through phone, email, or visit our center to order parts.' },
-        { title: 'What is the warranty on your parts?', description: 'All our parts come with a manufacturer warranty for peace of mind.' },
-      ],
+  const herospareparts: HeroProps = {
+    title: isAr ? 'قطع غيار هوندا وسيارات أخرى' : 'Honda & Car Spare Parts',
+    subtitle: isAr
+      ? 'اعثر على قطع غيار عالية الجودة لسيارات هوندا والموديلات الأخرى.'
+      : 'Find high-quality spare parts for Honda and other vehicle models.',
+    tagline: isAr ? 'قطع غيار موثوقة في مركز حسام' : 'Reliable Car Parts at Hossam Center',
+    callToAction: {
+      text: isAr ? 'طلب تسعيرة' : 'Get a Quote',
+      href: `/${lang}/contact`,
     },
-  ],
-};
+    callToAction2: {
+      text: isAr ? 'من نحن' : 'Learn more',
+      href: `/${lang}/about`,
+    },
+    videoSrc: '/videos/spare parts hero cover.mp4',
+  };
 
-// CallToAction data for Spare Parts page
-export const contactspareparts: CallToActionProps = {
-  id: 'call-to-action-honda-spare-parts',
-  hasBackground: true,
-  title: 'Need Spare Parts?',
-  subtitle: 'Contact us today to get the right spare parts for your Honda or other vehicle.',
-  form: {
-    inputs: [
-      { label: 'Name', type: 'text', placeholder: 'Enter your name' },
-      { label: 'Email', type: 'email', placeholder: 'Enter your email' },
-      { label: 'Message', type: 'textarea', placeholder: 'Describe your spare parts needs' },
+  const statsspareparts = {
+    id: 'stats-honda-spare-parts',
+    items: [
+      { 
+        title: '30+', 
+        description: isAr ? 'عاماً من الخبرة في توفير قطع غيار السيارات وخدمتها.' : 'Years of experience in car spare parts sales and service.' 
+      },
+      { 
+        title: '5000+', 
+        description: isAr ? 'عميل راضٍ حصلوا على قطع غيار عالية الجودة.' : 'Satisfied customers with top-quality spare parts.' 
+      },
+      { 
+        title: '100%', 
+        description: isAr ? 'الالتزام بالجودة ورضا العملاء التام.' : 'Commitment to quality and customer satisfaction.' 
+      },
     ],
-    btn: {
-      title: 'Send Message',
-      type: 'submit',
+  };
+
+  const featuresspareparts = {
+    id: 'features-honda-spare-parts',
+    header: {
+      title: isAr ? 'لماذا تختار مركز حسام لقطع الغيار؟' : 'Why Choose Hossam Center for Spare Parts?',
+      subtitle: isAr
+        ? 'نوفر قطع غيار أصلية ونضمن الأداء الأمثل لسيارتك.'
+        : 'We provide genuine parts and ensure top performance for your vehicle.',
     },
-  },
-  callToAction: { text: 'Order Now', href: '/contact' },
+    items: [
+      { 
+        title: isAr ? 'مجموعة واسعة من قطع الغيار' : 'Wide Range of Car Spares', 
+        description: isAr 
+          ? 'توفير قطع غيار لمختلف طرازات السيارات بما في ذلك هوندا وغيرها.' 
+          : 'Find spare parts for various car models, including Honda.' 
+      },
+      { 
+        title: isAr ? 'قطع غيار هوندا الأصلية' : 'Honda Genuine Parts', 
+        description: isAr 
+          ? 'نوفر مجموعة كاملة من قطع غيار هوندا الأصلية للحفاظ على جودة سيارتك وأدائها.' 
+          : 'We stock a full range of original Honda parts to maintain your vehicle’s quality and performance.' 
+      },
+      { 
+        title: isAr ? 'قطع غيار بوش الأصلية' : 'Bosch Parts', 
+        description: isAr 
+          ? 'نوفر أيضاً قطع غيار بوش عالية الجودة المعروفة بموثوقيتها ودقتها.' 
+          : 'We also offer high-quality Bosch parts, known for reliability and precision.' 
+      },
+    ],
+    additionalContent: [
+      { 
+        title: isAr ? 'قطع غيار هوندا' : 'Honda Spares', 
+        description: isAr
+          ? 'يتخصص مركز حسام في توفير قطع غيار عالية الجودة مصممة لضمان أفضل أداء لمركبتك الهوندا. يشتمل مخزوننا على أجزاء مهمة مثل بطانات الفرامل، قطع التعليق، والوحدات الكهربائية. يتم الحصول على كل جزء لتلبية معايير هوندا العالية للجودة والملائمة والمتانة.'
+          : 'Hossam Center specializes in high-quality spare parts designed to ensure the best performance. Our inventory includes critical components such as brake pads, suspension parts, and electrical modules.'
+      },
+    ],
+  };
+
+  const stepsspareparts = {
+    id: 'steps-honda-spare-parts',
+    items: [
+      { 
+        title: isAr ? 'الاستشارة والطلب' : 'Consultation', 
+        description: isAr 
+          ? 'ناقش احتياجاتك من قطع الغيار مع خبرائنا لتحديد القطعة المناسبة بدقة.' 
+          : 'Discuss your spare parts needs with our experts.' 
+      },
+      { 
+        title: isAr ? 'اختيار قطع الغيار' : 'Parts Selection', 
+        description: isAr 
+          ? 'نساعدك في اختيار قطع الغيار المناسبة تماماً لسيارتك بناءً على رقم الشاصي.' 
+          : 'We help you choose the right parts for your vehicle.' 
+      },
+      { 
+        title: isAr ? 'التركيب والضمان' : 'Installation & Service', 
+        description: isAr 
+          ? 'نقدم خدمة تركيب احترافية بواسطة فنيينا للتأكد من الملاءمة والعمل بكفاءة.' 
+          : 'We provide professional installation and ensure everything fits perfectly.' 
+      },
+    ],
+    image: {
+      src: 'https://res.cloudinary.com/dvcfefmys/image/upload/v1727952606/Honda_spares_ccrshh.webp',
+      alt: isAr ? 'قطع غيار هوندا' : 'Image of Honda spare parts',
+    },
+  };
+
+  const faqsspareparts: FAQsProps = {
+    id: 'faqs-honda-spare-parts',
+    hasBackground: false,
+    header: {
+      title: isAr ? 'الأسئلة الشائعة حول قطع الغيار' : 'Spare Parts FAQs',
+      subtitle: isAr
+        ? 'ابحث عن إجابات للأسئلة الشائعة حول قطع الغيار لدينا.'
+        : 'Find answers to common questions about our spare parts.',
+      position: 'center',
+    },
+    tabs: [
+      {
+        link: { label: isAr ? 'الخدمات العامة' : 'General Services', href: `/${lang}/services` },
+        items: isAr ? [
+          { title: 'ما هي أنواع قطع الغيار التي تقدمونها؟', description: 'نحن نقدم مجموعة واسعة من قطع الغيار الأصلية والبديلة لسيارات هوندا وغيرها.' },
+          { title: 'هل قطع غيار هوندا لديكم أصلية؟', description: 'نعم، نحن نوفر قطع غيار هوندا الأصلية من مصادر معتمدة لضمان الجودة والمتانة.' },
+          { title: 'هل تقدمون خدمات التركيب؟', description: 'نعم، يقدم فنيونا خدمات تركيب احترافية لجميع قطع الغيار التي نبيعها.' },
+          { title: 'كيف يمكنني طلب قطع الغيار؟', description: 'يمكنك التواصل معنا عبر الهاتف أو الواتساب، أو زيارة مركزنا مباشرة لطلب القطع المطلوبة.' },
+        ] : [
+          { title: 'What types of spare parts do you offer?', description: 'We offer a wide range of parts for Honda and other vehicle models.' },
+          { title: 'Are your Honda parts genuine?', description: 'Yes, we stock only genuine Honda parts for quality and durability.' },
+          { title: 'Do you provide installation services?', description: 'Yes, we offer professional installation for all the parts we sell.' },
+          { title: 'How can I order spare parts?', description: 'You can contact us through phone or WhatsApp, or visit our center to order parts.' },
+        ],
+      },
+    ],
+  };
+
+  return {
+    herospareparts,
+    statsspareparts,
+    featuresspareparts,
+    stepsspareparts,
+    faqsspareparts,
+  };
 };
+
+// Static placeholders for TS compile
+export const herospareparts = {} as any;
+export const statsspareparts = {} as any;
+export const featuresspareparts = {} as any;
+export const stepsspareparts = {} as any;
+export const faqsspareparts = {} as any;
+export const contactspareparts = {} as any;

@@ -1,130 +1,122 @@
-import { CallToActionProps, FAQsProps } from '~/shared/types';
-import { HeroProps } from '~/shared/types';
+import { CallToActionProps, FAQsProps, HeroProps } from '~/shared/types';
 
-// Hero data on FAQs page *******************
-export const heroFaqs: HeroProps = {
-  title: 'Frequently Asked Questions',
-  subtitle: (
-    <>
-      <span className="hidden md:inline">
-        {`Whether you need help using our Next.js and Tailwind CSS templates, solving problems, or just want some useful tips, our FAQs are here to assist you.`}
-      </span>{' '}
-      Explore them to optimize your experience with our website and products.
-    </>
-  ),
-  tagline: 'Demo FAQs Page',
+export const getFaqsData = (lang: string) => {
+  const isAr = lang === 'ar';
+
+  const heroFaqs: HeroProps = {
+    title: isAr ? 'الأسئلة الشائعة والاستفسارات' : 'Frequently Asked Questions',
+    subtitle: isAr ? (
+      <>
+        مرحبًا بك في صفحة الأسئلة الشائعة لمركز حسام. هنا ستجد إجابات على جميع استفساراتك حول صيانة سيارتك الهوندا وقطع الغيار الأصلية وأسعار الخدمات.
+      </>
+    ) : (
+      <>
+        Welcome to Hossam Center FAQs page. Here you can find answers to all your inquiries about Honda car maintenance, original spare parts, and service pricing.
+      </>
+    ),
+    tagline: isAr ? 'مركز مساعدة عملاء مركز حسام' : 'Hossam Center Help Center',
+  };
+
+  const faqs4Faqs: FAQsProps = {
+    id: 'faqsFour-on-faqs',
+    hasBackground: true,
+    header: {
+      title: isAr ? 'ابحث عن إجابة لسؤالك' : 'Find what you need',
+      subtitle: isAr ? 'إجابات سريعة وواضحة: كل ما تحتاج معرفته في مكان واحد.' : 'Get quick answers to your questions: Everything you need in one spot.',
+      position: 'center',
+    },
+    tabs: [
+      {
+        link: {
+          label: isAr ? 'أسئلة عامة' : 'General',
+          href: '/tab1',
+        },
+        items: isAr ? [
+          {
+            title: 'هل أنتم متخصصون في سيارات هوندا فقط؟',
+            description: 'نعم، نحن متخصصون بشكل رئيسي في صيانة وإصلاح سيارات هوندا بكافة طرازاتها وفئاتها، ونوفر لها أفضل خدمات الفحص والمعايرة المتخصصة.',
+          },
+          {
+            title: 'ما هي ساعات وأيام الدوام في المركز؟',
+            description: 'نعمل من يوم الأحد إلى يوم الخميس، من الساعة 09:00 صباحاً وحتى الساعة 06:00 مساءً. ويوم الجمعة هو يوم العطلة الأسبوعية.',
+          },
+          {
+            title: 'أين يقع مركز حسام للصيانة؟',
+            description: 'يقع مركزنا في عمان، الأردن، على شارع الشهيد. يمكنك الاطلاع على موقعنا الجغرافي الدقيق على الخريطة في صفحة اتصل بنا.',
+          },
+        ] : [
+          {
+            title: 'Do you only service Honda vehicles?',
+            description: 'Yes, we are highly specialized in Honda vehicle repair and maintenance services, providing expert tools and technicians for all Honda models.',
+          },
+          {
+            title: 'What are your working hours?',
+            description: 'We are open from Sunday to Thursday, 09:00 AM to 06:00 PM. We are closed on Fridays.',
+          },
+          {
+            title: 'Where is Hossam Maintenance Center located?',
+            description: 'Our center is located on Al-Shahid Road, Amman, Jordan. You can see our exact location on the map in the Contact page.',
+          },
+        ],
+      },
+      {
+        link: {
+          label: isAr ? 'قطع الغيار والضمان' : 'Spare Parts & Warranty',
+          href: '/tab2',
+        },
+        items: isAr ? [
+          {
+            title: 'هل توفرون قطع غيار هوندا الأصلية؟',
+            description: 'نعم، نحن نوفر قطع الغيار الأصلية المستوردة والمطابقة لمواصفات المصنع بالكامل، بالإضافة لقطع غيار بوش الأصلية عالية الجودة والاعتمادية.',
+          },
+          {
+            title: 'هل تأتي قطع الغيار مع ضمان؟',
+            description: 'نعم، جميع قطع الغيار التي يتم تركيبها في مركزنا تأتي مع ضمان المصنع وضمان التركيب لضمان راحة بالك وجودة الخدمة.',
+          },
+        ] : [
+          {
+            title: 'Do you provide genuine Honda spare parts?',
+            description: 'Yes, we supply genuine Honda spare parts directly matching factory standards, as well as premium Bosch parts.',
+          },
+          {
+            title: 'Do the spare parts come with a warranty?',
+            description: 'Yes, all spare parts supplied and installed at our facility come with a standard manufacturer and service warranty for peace of mind.',
+          },
+        ],
+      },
+      {
+        link: {
+          label: isAr ? 'الحجز والتسعير' : 'Booking & Pricing',
+          href: '/tab3',
+        },
+        items: isAr ? [
+          {
+            title: 'هل يجب علي حجز موعد قبل الحضور؟',
+            description: 'نعم، لتجنب فترات الانتظار الطويلة وضمان فحص سيارتك فوراً، ننصح بحجز موعد مسبق عبر الهاتف أو رسائل الواتساب.',
+          },
+          {
+            title: 'هل تقدمون تقديرات مجانية لتكلفة الصيانة؟',
+            description: 'نعم، بعد إجراء الفحص التشخيصي المبدئي لسيارتك، نقدم تقديراً مفصلاً ودقيقاً للتكلفة المطلوبة قبل البدء بأي أعمال إصلاح.',
+          },
+        ] : [
+          {
+            title: 'Do I need to book an appointment before visiting?',
+            description: 'Yes, we highly recommend scheduling your appointment via phone or WhatsApp in advance to ensure prompt inspection.',
+          },
+          {
+            title: 'Do you provide cost estimates before starting work?',
+            description: 'Yes, following a diagnostic scan, we provide a detailed cost estimate for transparency before performing any repairs.',
+          },
+        ],
+      },
+    ],
+  };
+
+  return { heroFaqs, faqs4Faqs };
 };
 
-// FAQS4 data on FAQs page *******************
-export const faqs4Faqs: FAQsProps = {
-  id: 'faqsFour-on-faqs',
-  hasBackground: true,
-  header: {
-    title: 'Find what you need',
-    subtitle: 'Get quick answers to your questions: Everything you need in one spot.',
-    position: 'center',
-  },
-  tabs: [
-    {
-      link: {
-        label: 'General',
-        href: '/tab1',
-      },
-      items: [
-        {
-          title: 'What do I need to start?',
-          description: `Nunc mollis tempor quam, non fringilla elit sagittis in. Nullam vitae consectetur mi, a elementum arcu. Sed laoreet, ipsum et vehicula dignissim, leo orci pretium sem, ac condimentum tellus est quis ligula.`,
-        },
-        {
-          title: 'How to install the NextJS + Tailwind CSS template?',
-          description: `Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer eleifend vestibulum nisl in iaculis. Mauris dictum ac purus vestibulum auctor. Praesent imperdiet lectus et massa faucibus, quis viverra massa rhoncus.`,
-        },
-        {
-          title: "What's something that you completely don't understand?",
-          description: `Mauris vitae eros a dui varius luctus. Suspendisse rutrum, sapien nec blandit bibendum, justo sapien sollicitudin erat, id aliquam sapien purus quis leo. Aliquam vulputate vestibulum consectetur.`,
-        },
-        {
-          title: "What's an example of when you changed your mind?",
-          description: `Nunc dapibus lacinia ipsum ut elementum. Integer in pretium sapien. Ut pretium nisl mauris, ut rutrum justo condimentum id. Etiam aliquet, arcu at iaculis laoreet, est arcu egestas sapien, eget sollicitudin odio orci et nunc.`,
-        },
-        {
-          title: 'What is something that you would really like to try again?',
-          description: `Duis in maximus mauris, id eleifend mauris. Nam a fringilla arcu. Curabitur convallis, tellus non aliquet rhoncus, lacus massa auctor eros, in interdum lectus augue sed augue. Fusce tempor ex id faucibus efficitur.`,
-        },
-        {
-          title: 'If you could only ask one question to each person you meet, what would that question be?',
-          description: `Nullam imperdiet sapien tincidunt erat dapibus faucibus. Vestibulum a sem nec lorem imperdiet scelerisque non sed lacus. Ut pulvinar id diam vitae auctor. Nam tempus, neque et elementum consectetur, ex ipsum pulvinar risus, vel sodales ligula tortor eu eros.`,
-        },
-      ],
-    },
-    {
-      link: {
-        label: 'Plans, prices and payments',
-        href: '/tab2',
-      },
-      items: [
-        {
-          title: 'Which plan is best for me?',
-          description: `Nunc mollis tempor quam, non fringilla elit sagittis in. Nullam vitae consectetur mi, a elementum arcu. Sed laoreet, ipsum et vehicula dignissim, leo orci pretium sem, ac condimentum tellus est quis ligula.`,
-        },
-        {
-          title: 'What are my payment options?',
-          description: `Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer eleifend vestibulum nisl in iaculis. Mauris dictum ac purus vestibulum auctor. Praesent imperdiet lectus et massa faucibus, quis viverra massa rhoncus.`,
-        },
-        {
-          title: 'How do I change my plan to a different one?',
-          description: `Mauris vitae eros a dui varius luctus. Suspendisse rutrum, sapien nec blandit bibendum, justo sapien sollicitudin erat, id aliquam sapien purus quis leo. Aliquam vulputate vestibulum consectetur.`,
-        },
-        {
-          title: 'What happen at the end of my free trial?',
-          description: `Nunc dapibus lacinia ipsum ut elementum. Integer in pretium sapien. Ut pretium nisl mauris, ut rutrum justo condimentum id. Etiam aliquet, arcu at iaculis laoreet, est arcu egestas sapien, eget sollicitudin odio orci et nunc.`,
-        },
-        {
-          title: 'Can I import data from other tools?',
-          description: `Duis in maximus mauris, id eleifend mauris. Nam a fringilla arcu. Curabitur convallis, tellus non aliquet rhoncus, lacus massa auctor eros, in interdum lectus augue sed augue. Fusce tempor ex id faucibus efficitur.`,
-        },
-        {
-          title: 'Can I cancel my plan at any time?',
-          description: `Nullam imperdiet sapien tincidunt erat dapibus faucibus. Vestibulum a sem nec lorem imperdiet scelerisque non sed lacus. Ut pulvinar id diam vitae auctor. Nam tempus, neque et elementum consectetur, ex ipsum pulvinar risus, vel sodales ligula tortor eu eros.`,
-        },
-      ],
-    },
-    {
-      link: {
-        label: 'Others',
-        href: '/tab3',
-      },
-      items: [
-        {
-          title: 'How do I download the template?',
-          description: `In ullamcorper pellentesque ante, nec commodo ex euismod viverra. Phasellus facilisis, justo a bibendum pellentesque, nibh est egestas lectus, volutpat ullamcorper arcu ante ac dolor.`,
-        },
-        {
-          title: 'How do I customize the template?',
-          description: `Pellentesque semper euismod malesuada. Curabitur quis lectus tortor. Aliquam efficitur pretium tellus, ut sagittis turpis dignissim eget. Etiam scelerisque nec risus eget iaculis. Nunc maximus metus id felis dapibus, sed ullamcorper sapien faucibus.`,
-        },
-        {
-          title: 'Does the template come with any tutorials or instructions?',
-          description: `Sed sagittis arcu suscipit auctor suscipit. Nam dapibus risus vitae tristique fermentum. In egestas turpis elit, id gravida diam dictum eu. Ut dictum libero ut rhoncus egestas. Ut sit amet tortor blandit, faucibus tellus vitae, consequat purus. Nullam id odio enim.`,
-        },
-        {
-          title: 'Are there any additional fees or charges for using the template?',
-          description: `Fusce efficitur, augue et vulputate pharetra, augue turpis viverra turpis, id tempor purus eros sed erat. Curabitur blandit eget sem vitae malesuada.`,
-        },
-      ],
-    },
-  ],
-};
-
-// CallToAction data on FAQs page *******************
-export const callToActionFaqs: CallToActionProps = {
-  id: 'callToAction-on-faqs',
-  hasBackground: true,
-  title: 'Still have questions?',
-  subtitle:
-    'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut in leo odio. Cras finibus ex a ante convallis ullamcorper.',
-  callToAction: {
-    text: 'Contact us',
-    href: '/contact',
-  },
-};
+// Legacy placeholders for TS compile
+export const heroFaqs = {} as any;
+export const faqs4Faqs = {} as any;
+export const callToActionFaqs = {} as any;
+export const faqsAbout = {} as any;
