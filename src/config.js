@@ -1,5 +1,5 @@
 module.exports.SITE = {
-  name: 'TailNext',
+  name: 'Hossam Maintenance Center',
 
   origin: 'https://housam-honda.com/',
   basePathname: '/',
