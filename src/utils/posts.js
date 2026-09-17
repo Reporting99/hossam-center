@@ -16,7 +16,9 @@ const load = () => {
       }),
   );
 
-  return posts;
+  // Drop unpublished posts. Frontmatter `draft: true` opts a post out; posts without the
+  // flag (i.e. every existing post today) remain published, preserving current behavior.
+  return posts.then((all) => all.filter((post) => post && post.draft !== true));
 };
 
 let _posts;

@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { findPostBySlug, findLatestPosts } from '~/utils/posts';
+import { serializeJsonLd } from '~/utils/jsonld';
+import { SITE } from '~/config.js';
 
 interface PageProps {
   params: Promise<{ lang: string; slug: string }>;
@@ -55,8 +57,28 @@ export default async function Page({ params }: PageProps) {
     return notFound();
   }
 
+  const cleanOrigin = SITE.origin.endsWith('/') ? SITE.origin.slice(0, -1) : SITE.origin;
+  const url = `${cleanOrigin}/${resolvedParams.lang}/${resolvedParams.slug}`;
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': post.title,
+    'description': post.description,
+    'image': post.image ? [post.image] : undefined,
+    'datePublished': post.publishDate,
+    'mainEntityOfPage': { '@type': 'WebPage', '@id': url },
+    // Reference the single business entity defined in JsonLd.tsx by @id rather than
+    // duplicating its schema on every post.
+    'publisher': { '@id': `${cleanOrigin}/#hossam-center` },
+    'author': { '@id': `${cleanOrigin}/#hossam-center` },
+  };
+
   return (
     <section className="mx-auto py-8 sm:py-16 lg:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }}
+      />
       <article>
         <header className={post.image ? 'text-center' : ''}>
           <p className="mx-auto max-w-3xl px-4 sm:px-6">

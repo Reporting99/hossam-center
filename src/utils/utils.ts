@@ -29,6 +29,8 @@ export const getAlternates = (lang: string, path: string = '') => {
     languages: {
       en: `${cleanOrigin}/en${cleanPath}`,
       ar: `${cleanOrigin}/ar${cleanPath}`,
+      // Default locale per middleware.ts (locales without a prefix are redirected to `ar`).
+      'x-default': `${cleanOrigin}/ar${cleanPath}`,
     },
   };
 };

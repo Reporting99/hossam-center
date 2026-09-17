@@ -1,4 +1,5 @@
 import { SITE } from '~/config.js';
+import { serializeJsonLd } from '~/utils/jsonld';
 
 interface JsonLdProps {
   lang: string;
@@ -95,7 +96,7 @@ export default function JsonLd({ lang }: JsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }
