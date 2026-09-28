@@ -7,24 +7,18 @@ import Hero from '~/components/widgets/Hero';
 import Contact from '~/components/widgets/Contact';
 import { getServicesData } from '~/shared/data/pages/services.data';
 import { getHomeData } from '~/shared/data/pages/home.data';
+import { buildStaticPageMetadata } from '~/lib/page-metadata';
+import { toLocale } from '~/lib/page-mappings';
+import { serializeJsonLd } from '~/lib/schema';
+import { buildServicesListingJsonLd, faqItemsFromFaqsProps } from '~/lib/page-jsonld';
 
 interface PageProps {
   params: Promise<{ lang: string }>;
 }
 
-import { getAlternates } from '~/utils/utils';
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { lang } = resolvedParams;
-  const isAr = lang === 'ar';
-  return {
-    title: isAr ? 'خدمات صيانة هوندا المميزة' : 'Honda Car Maintenance Services',
-    description: isAr 
-      ? 'اكتشف خدماتنا لسيارات هوندا: صيانة عامة، قطع غيار أصلية، معايرة الرادار، فحص كمبيوتر وتحديث برمجيات هوندا في عمان، الأردن.'
-      : 'Explore our services for Honda vehicles: general maintenance, spare parts, radar calibration, OBD diagnostics, and software updates in Amman, Jordan.',
-    alternates: getAlternates(lang, '/services'),
-  };
+  const { lang } = await params;
+  return buildStaticPageMetadata('servicesListing', toLocale(lang));
 }
 
 export default async function Page({ params }: PageProps) {
@@ -42,8 +36,12 @@ export default async function Page({ params }: PageProps) {
 
   const { contactHome } = getHomeData(lang);
 
+  const locale = toLocale(lang);
+  const jsonLdSchemas = buildServicesListingJsonLd(locale, { faqs: faqItemsFromFaqsProps(faqsServices) });
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLdSchemas) }} />
       <Hero {...heroServices} />
       <Features2 {...features2Services} />
       <Content {...contentServicesOne} />

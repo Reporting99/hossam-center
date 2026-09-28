@@ -7,24 +7,18 @@ import Stats from '~/components/widgets/Stats';
 import Steps from '~/components/widgets/Steps';
 import { getACGasServiceData } from '~/shared/data/pages/ac-gas-service.data';
 import { getHomeData } from '~/shared/data/pages/home.data';
+import { buildStaticPageMetadata } from '~/lib/page-metadata';
+import { toLocale } from '~/lib/page-mappings';
+import { serializeJsonLd } from '~/lib/schema';
+import { buildServicePageJsonLd, faqItemsFromFaqsProps } from '~/lib/page-jsonld';
 
 interface PageProps {
   params: Promise<{ lang: string }>;
 }
 
-import { getAlternates } from '~/utils/utils';
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { lang } = resolvedParams;
-  const isAr = lang === 'ar';
-  return {
-    title: isAr ? 'صيانة وتعبئة غاز مكيف هوندا' : 'Honda AC Gas Refill & Service',
-    description: isAr 
-      ? 'مركز حسام يقدم خدمات فحص ضغط المكيف وتعبئة غاز الفريون الأصلي لسيارات هوندا مع الكشف عن التسريبات في عمان، الأردن.'
-      : 'Hossam Center provides expert AC pressure testing, genuine gas charging, and leak diagnosis for Honda cars in Amman, Jordan.',
-    alternates: getAlternates(lang, '/services/AC-Gas-Service'),
-  };
+  const { lang } = await params;
+  return buildStaticPageMetadata('servicesAcGasService', toLocale(lang));
 }
 
 export default async function Page({ params }: PageProps) {
@@ -42,8 +36,12 @@ export default async function Page({ params }: PageProps) {
   const { contactHome } = getHomeData(lang);
   const isAr = lang === 'ar';
 
+  const locale = toLocale(lang);
+  const jsonLdSchemas = buildServicePageJsonLd('servicesAcGasService', locale, { faqs: faqItemsFromFaqsProps(faqsACGas) });
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLdSchemas) }} />
       <Hero2 {...heroACGas} />
       <Stats {...statsACGas} />
       <Features {...featuresACGas} />

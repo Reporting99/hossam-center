@@ -4,6 +4,7 @@ title: 'أعطال كمبيوتر هوندا الشائعة: لماذا تحتا
 description: 'استكشف المشاكل الشائعة في كمبيوتر المحرك والجير لسيارات هوندا وكيف يحلها تحديث البرمجيات.'
 image: 'https://res.cloudinary.com/dvcfefmys/image/upload/v1727960473/Computer_Software_Update_j6ualp.webp'
 tags: [هوندا, كمبيوتر, تحديث, برمجة]
+translationKey: 'honda-software-update'
 lang: 'ar'
 ---
 

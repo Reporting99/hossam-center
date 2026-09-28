@@ -6,24 +6,18 @@ import FAQs3 from '~/components/widgets/FAQs3';
 import Contact from '~/components/widgets/Contact';
 import { getPricingData } from '~/shared/data/pages/pricing.data';
 import { getHomeData } from '~/shared/data/pages/home.data';
+import { buildStaticPageMetadata } from '~/lib/page-metadata';
+import { toLocale } from '~/lib/page-mappings';
+import { serializeJsonLd } from '~/lib/schema';
+import { buildStaticPageJsonLd, faqItemsFromFaqsProps } from '~/lib/page-jsonld';
 
 interface PageProps {
   params: Promise<{ lang: string }>;
 }
 
-import { getAlternates } from '~/utils/utils';
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { lang } = resolvedParams;
-  const isAr = lang === 'ar';
-  return {
-    title: isAr ? 'باقات أسعار صيانة سيارات هوندا' : 'Honda Servicing Plans & Prices',
-    description: isAr 
-      ? 'أسعار باقات صيانة هوندا الدورية والبسيطة ومعايرة الرادار وتحديثات برمجيات كمبيوتر السيارة في عمان، الأردن.'
-      : 'Pricing for Honda routine maintenance, engine service, ADAS calibrations, and ECU software flashes in Amman, Jordan.',
-    alternates: getAlternates(lang, '/pricing'),
-  };
+  const { lang } = await params;
+  return buildStaticPageMetadata('pricing', toLocale(lang));
 }
 
 export default async function Page({ params }: PageProps) {
@@ -33,8 +27,12 @@ export default async function Page({ params }: PageProps) {
   const { heroPricing, pricingPricing, comparisonPricing, faqs3Pricing } = getPricingData(lang);
   const { contactHome } = getHomeData(lang);
 
+  const locale = toLocale(lang);
+  const jsonLdSchemas = buildStaticPageJsonLd('pricing', locale, { faqs: faqItemsFromFaqsProps(faqs3Pricing) });
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLdSchemas) }} />
       <Hero {...heroPricing} />
       <Pricing {...pricingPricing} />
       <Comparison {...comparisonPricing} />

@@ -7,24 +7,18 @@ import Stats from '~/components/widgets/Stats';
 import Steps from '~/components/widgets/Steps';
 import { getCarComputerDiagnosticData } from '~/shared/data/pages/car-computer-diagnostic.data';
 import { getHomeData } from '~/shared/data/pages/home.data';
+import { buildStaticPageMetadata } from '~/lib/page-metadata';
+import { toLocale } from '~/lib/page-mappings';
+import { serializeJsonLd } from '~/lib/schema';
+import { buildServicePageJsonLd, faqItemsFromFaqsProps } from '~/lib/page-jsonld';
 
 interface PageProps {
   params: Promise<{ lang: string }>;
 }
 
-import { getAlternates } from '~/utils/utils';
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { lang } = resolvedParams;
-  const isAr = lang === 'ar';
-  return {
-    title: isAr ? 'فحص كمبيوتر سيارات هوندا' : 'Honda Car Computer Diagnostic',
-    description: isAr 
-      ? 'مركز حسام يقدم خدمات فحص كمبيوتر هوندا وتشخيص الأعطال وقراءتها بدقة عالية باستخدام أحدث الأجهزة الذكية في عمان، الأردن.'
-      : 'Hossam Center provides advanced computer diagnostics and OBD checks for Honda cars in Amman, Jordan.',
-    alternates: getAlternates(lang, '/services/Car-Computer-Diagnostic'),
-  };
+  const { lang } = await params;
+  return buildStaticPageMetadata('servicesCarComputerDiagnostic', toLocale(lang));
 }
 
 export default async function Page({ params }: PageProps) {
@@ -42,8 +36,12 @@ export default async function Page({ params }: PageProps) {
   const { contactHome } = getHomeData(lang);
   const isAr = lang === 'ar';
 
+  const locale = toLocale(lang);
+  const jsonLdSchemas = buildServicePageJsonLd('servicesCarComputerDiagnostic', locale, { faqs: faqItemsFromFaqsProps(faqsCarDiagnostic) });
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLdSchemas) }} />
       <Hero2 {...heroCarDiagnostic} />
       <Stats {...statsCarDiagnostic} />
       <Features {...featuresCarDiagnostic} />

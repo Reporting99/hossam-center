@@ -4,6 +4,7 @@ title: 'Common Honda ECU Issues: Why You Need Regular Computer Updates'
 description: 'Explore common engine and transmission computer issues in Honda vehicles and how software updates fix them.'
 image: 'https://res.cloudinary.com/dvcfefmys/image/upload/v1727960473/Computer_Software_Update_j6ualp.webp'
 tags: [Honda, ECU, Software, Update]
+translationKey: 'honda-software-update'
 lang: 'en'
 ---
 

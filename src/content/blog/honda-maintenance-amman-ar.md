@@ -4,6 +4,7 @@ title: 'الدليل الشامل لصيانة سيارات هوندا في عم
 description: 'دليلك الشامل لنصائح وجدول الصيانة وقطع الغيار الأصلية لسيارات هوندا في عمان، الأردن.'
 image: 'https://res.cloudinary.com/dvcfefmys/image/upload/v1727950615/honda_maintenance_bfgb4g.webp'
 tags: [هوندا, صيانة, عمان, الأردن]
+translationKey: 'honda-maintenance-amman'
 lang: 'ar'
 ---
 

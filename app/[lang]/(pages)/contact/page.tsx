@@ -3,24 +3,18 @@ import Contact from '~/components/widgets/Contact';
 import Features2 from '~/components/widgets/Features2';
 import Hero from '~/components/widgets/Hero';
 import { getContactData } from '~/shared/data/pages/contact.data';
+import { buildStaticPageMetadata } from '~/lib/page-metadata';
+import { toLocale } from '~/lib/page-mappings';
+import { serializeJsonLd } from '~/lib/schema';
+import { buildStaticPageJsonLd } from '~/lib/page-jsonld';
 
 interface PageProps {
   params: Promise<{ lang: string }>;
 }
 
-import { getAlternates } from '~/utils/utils';
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { lang } = resolvedParams;
-  const isAr = lang === 'ar';
-  return {
-    title: isAr ? 'اتصل بنا' : 'Contact Us',
-    description: isAr 
-      ? 'تواصل مع مركز حسام لصيانة سيارات هوندا في عمان، الأردن. أرقام الهواتف، والواتساب، وخريطة الموقع وساعات العمل.'
-      : 'Get in touch with Hossam Honda Maintenance Center in Amman, Jordan. Phone numbers, WhatsApp, map location, and business hours.',
-    alternates: getAlternates(lang, '/contact'),
-  };
+  const { lang } = await params;
+  return buildStaticPageMetadata('contact', toLocale(lang));
 }
 
 export default async function Page({ params }: PageProps) {
@@ -29,8 +23,12 @@ export default async function Page({ params }: PageProps) {
   const { heroContact, contactData, features2Contact } = getContactData(lang);
   const isAr = lang === 'ar';
 
+  const locale = toLocale(lang);
+  const jsonLdSchemas = buildStaticPageJsonLd('contact', locale);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLdSchemas) }} />
       <Hero {...heroContact} />
       
       {/* Contact Info (no form) */}
