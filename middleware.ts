@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const locales = ['en', 'ar'];
-const defaultLocale = 'ar';
+import { DEFAULT_LOCALE, LOCALES } from '~/lib/page-mappings';
+
+// Locale set and default come from the route registry, so the redirect
+// target always equals the hreflang x-default target.
+const locales = LOCALES;
+const defaultLocale = DEFAULT_LOCALE;
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

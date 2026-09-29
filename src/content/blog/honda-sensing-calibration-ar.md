@@ -4,6 +4,7 @@ title: 'لماذا تعد معايرة الرادار والكاميرا الا�
 description: 'تعرف على سبب وجوب معايرة رادار وكاميرا الأمان (ADAS) بعد استبدال الزجاج الأمامي أو المصد لسيارات هوندا.'
 image: 'https://res.cloudinary.com/dvcfefmys/image/upload/v1727953573/Radar_Calibration_oh0s0a.webp'
 tags: [هوندا, رادار, معايرة, Sensing]
+translationKey: 'honda-sensing-calibration'
 lang: 'ar'
 ---
 

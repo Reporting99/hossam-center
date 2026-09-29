@@ -7,10 +7,13 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start -p 3003",
-    "lint": "eslint \"app/**/*.{js,jsx,ts,tsx}\" \"src/{components,hooks,shared,utils}/**/*.{js,jsx,ts,tsx}\" src/config.js",
+    "lint": "eslint \"app/**/*.{js,jsx,ts,tsx}\" \"src/{components,hooks,lib,shared,utils}/**/*.{js,jsx,ts,tsx}\" \"scripts/**/*.ts\" middleware.ts src/config.js",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p .",
+    "validate:seo": "jiti scripts/validate-seo-invariants.ts",
+    "validate:sitemap-url-invariants": "jiti scripts/validate-sitemap-url-invariants.ts"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.12.0",

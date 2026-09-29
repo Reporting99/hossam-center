@@ -4,6 +4,7 @@ title: 'Why Professional Radar & Camera Calibration is Vital for Honda Sensing'
 description: 'Learn why ADAS calibration is necessary after windshield replacement or bumper repair for Honda sensing cars.'
 image: 'https://res.cloudinary.com/dvcfefmys/image/upload/v1727953573/Radar_Calibration_oh0s0a.webp'
 tags: [Honda, ADAS, Radar, Sensing]
+translationKey: 'honda-sensing-calibration'
 lang: 'en'
 ---
 

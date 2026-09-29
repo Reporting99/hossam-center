@@ -6,7 +6,6 @@ import Providers from '~/components/atoms/Providers';
 import Header from '~/components/widgets/Header';
 import Announcement from '~/components/widgets/Announcement';
 import Footer from '~/components/widgets/Footer';
-import JsonLd from '~/components/common/JsonLd';
 import FloatingActions from '~/components/common/FloatingActions';
 
 import { Inter as CustomFont } from 'next/font/google';
@@ -19,7 +18,7 @@ export interface LayoutProps {
   params: Promise<{ lang: string }>;
 }
 
-import { getAlternates } from '~/utils/utils';
+import { SITE_URL } from '~/lib/site-url';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -33,7 +32,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: isAr 
       ? 'مركز حسام المتخصص في صيانة سيارات هوندا وتوفير قطع الغيار الأصلية ومعايرة الرادار وفحص كمبيوتر وتحديث برمجيات هوندا في عمان، الأردن.'
       : SITE.description,
-    alternates: getAlternates(lang),
+    // Every relative URL in page metadata resolves against the one origin
+    // source. canonical/hreflang/openGraph are declared per page (via
+    // ~/lib/page-metadata), never here: a layout-level canonical would be
+    // inherited by pages that should not declare one (404s, drafts).
+    metadataBase: new URL(SITE_URL),
   };
 }
 
@@ -47,7 +50,6 @@ export default async function RootLayout({ children, params }: LayoutProps) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <JsonLd lang={lang} />
       </head>
       <body className="tracking-tight antialiased text-gray-900 dark:text-slate-300 dark:bg-black">
         <Providers>

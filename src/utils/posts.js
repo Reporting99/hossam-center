@@ -41,6 +41,9 @@ export const findLatestPosts = async ({ count } = {}) => {
 /** */
 export const findPostBySlug = async (slug) => {
   if (!slug) return null;
+  // A slug is a single filename segment; never let a route param walk out of
+  // the blog directory (e.g. "../terms/terms").
+  if (/[\\/]|\.\./.test(slug)) return null;
 
   try {
     const readFile = fs.readFileSync(join(BLOG_DIR, `${slug}.md`), 'utf-8');

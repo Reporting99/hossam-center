@@ -7,24 +7,18 @@ import Stats from '~/components/widgets/Stats';
 import Steps from '~/components/widgets/Steps';
 import { getRadarCalibrationData } from '~/shared/data/pages/radar calibration.data';
 import { getHomeData } from '~/shared/data/pages/home.data';
+import { buildStaticPageMetadata } from '~/lib/page-metadata';
+import { toLocale } from '~/lib/page-mappings';
+import { serializeJsonLd } from '~/lib/schema';
+import { buildServicePageJsonLd, faqItemsFromFaqsProps } from '~/lib/page-jsonld';
 
 interface PageProps {
   params: Promise<{ lang: string }>;
 }
 
-import { getAlternates } from '~/utils/utils';
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { lang } = resolvedParams;
-  const isAr = lang === 'ar';
-  return {
-    title: isAr ? 'معايرة رادار هوندا Sensing وADAS' : 'Honda Sensing ADAS Radar Calibration',
-    description: isAr 
-      ? 'مركز حسام المتخصص في معايرة الرادارات والكاميرات الأمامية لسيارات هوندا لضمان عمل أنظمة الأمان بدقة عالية في عمان، الأردن.'
-      : 'Hossam Center specializes in radar and front camera calibration for Honda Sensing safety systems in Amman, Jordan.',
-    alternates: getAlternates(lang, '/services/Radar-Calibration'),
-  };
+  const { lang } = await params;
+  return buildStaticPageMetadata('servicesRadarCalibration', toLocale(lang));
 }
 
 export default async function Page({ params }: PageProps) {
@@ -42,8 +36,12 @@ export default async function Page({ params }: PageProps) {
   const { contactHome } = getHomeData(lang);
   const isAr = lang === 'ar';
 
+  const locale = toLocale(lang);
+  const jsonLdSchemas = buildServicePageJsonLd('servicesRadarCalibration', locale, { faqs: faqItemsFromFaqsProps(faqsradarcalibration) });
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLdSchemas) }} />
       <Hero2 {...heroradarcalibration} />
       <Stats {...statsradarcalibration} />
       <Features {...featuresradarcalibration} />

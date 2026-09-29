@@ -1,7 +1,8 @@
 module.exports.SITE = {
   name: 'Hossam Maintenance Center',
 
-  origin: 'https://housam-honda.com/',
+  // The site origin is NOT configured here: src/lib/site-url.ts (SITE_URL)
+  // is the only origin source for canonical/hreflang/sitemap/robots/JSON-LD.
   basePathname: '/',
   trailingSlash: false,
 
