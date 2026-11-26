@@ -11,7 +11,7 @@
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit -p .",
+    "typecheck": "next typegen && tsc --noEmit -p .",
     "validate:seo": "jiti scripts/validate-seo-invariants.ts",
     "validate:sitemap-url-invariants": "jiti scripts/validate-sitemap-url-invariants.ts"
   },
