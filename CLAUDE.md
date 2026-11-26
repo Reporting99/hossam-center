@@ -8,3 +8,5 @@ Standard: Reporting99/devops `frontend-standard/FRONTEND-STANDARD-V1.0.md`.
 - Runtime today: root pm2 `next start -p 3003` in-place — known risk; do not change process management in frontend work.
 - Commands (Node ≥18.17 per engines; production 20.20.2, npm): `npm run typecheck` · `npm run lint` · `npm test` · `npm run build` (`--webpack`).
 - Never: redesign, change URLs/metadata/JSON-LD/hreflang, expose env values, claim done without command output.
+
+Compliance: `node <devops checkout>/frontend-standard/check.mjs .` from this directory: 8/8 mandatory expected, or only the exceptions listed above.
