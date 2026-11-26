@@ -1,0 +1,1 @@
+Project rules (Frontend Standard V1.0, directory map, FeelStack boundary, commands, exceptions, design/SEO preservation, release policy): see `CLAUDE.md` in this directory. Reference: Reporting99/devops `frontend-standard/FRONTEND-STANDARD-V1.0.md`.
