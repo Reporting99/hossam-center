@@ -20,7 +20,7 @@ const Collapse = ({ items, classCollapseItem, iconUp, iconDown }: CollapseProps)
               className="align-center flex justify-between"
               id={`accordion__heading-${index}`}
               aria-disabled="false"
-              aria-expanded="false"
+              aria-expanded={activeIndex === index}
               aria-controls={`accordion__panel-${index}`}
               role="button"
             >
@@ -37,15 +37,16 @@ const Collapse = ({ items, classCollapseItem, iconUp, iconDown }: CollapseProps)
                 <IconChevronDown className="h-6 w-6 text-primary-600 dark:text-slate-200" />
               )}
             </div>
-            {activeIndex === index && (
-              <div
-                className="mt-3 select-none"
-                aria-labelledby={`accordion__heading-${index}`}
-                id={`accordion__panel-${index}`}
-              >
-                <p className="mt-2 text-gray-600 dark:text-slate-400">{description}</p>
-              </div>
-            )}
+            {/* Always in the HTML (crawlers and answer engines read the FAQ that the JSON-LD describes);
+                closed panels are hidden exactly as before. */}
+            <div
+              className="mt-3 select-none"
+              aria-labelledby={`accordion__heading-${index}`}
+              id={`accordion__panel-${index}`}
+              hidden={activeIndex !== index}
+            >
+              <p className="mt-2 text-gray-600 dark:text-slate-400">{description}</p>
+            </div>
           </div>
         </div>
       ))}
