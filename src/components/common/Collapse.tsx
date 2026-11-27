@@ -1,11 +1,14 @@
 'use client';
 
+import { useId } from 'react';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import useCollapse from '~/hooks/useCollapse';
 import { CollapseProps } from '~/shared/types';
 
 const Collapse = ({ items, classCollapseItem, iconUp, iconDown }: CollapseProps) => {
   const { activeIndex, handleSetIndex } = useCollapse();
+  // Unique per accordion: a page can render several (FAQ tabs), and ids must not repeat.
+  const uid = useId();
 
   return (
     <>
@@ -18,11 +21,18 @@ const Collapse = ({ items, classCollapseItem, iconUp, iconDown }: CollapseProps)
           <div className={classCollapseItem}>
             <div
               className="align-center flex justify-between"
-              id={`accordion__heading-${index}`}
+              id={`${uid}-heading-${index}`}
               aria-disabled="false"
               aria-expanded={activeIndex === index}
-              aria-controls={`accordion__panel-${index}`}
+              aria-controls={`${uid}-panel-${index}`}
               role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleSetIndex(index);
+                }
+              }}
             >
               <h2 className="w-full pr-2 text-lg font-medium leading-6 text-gray-900 dark:text-slate-300">{title}</h2>
               {iconDown && iconUp ? (
@@ -41,8 +51,8 @@ const Collapse = ({ items, classCollapseItem, iconUp, iconDown }: CollapseProps)
                 closed panels are hidden exactly as before. */}
             <div
               className="mt-3 select-none"
-              aria-labelledby={`accordion__heading-${index}`}
-              id={`accordion__panel-${index}`}
+              aria-labelledby={`${uid}-heading-${index}`}
+              id={`${uid}-panel-${index}`}
               hidden={activeIndex !== index}
             >
               <p className="mt-2 text-gray-600 dark:text-slate-400">{description}</p>
