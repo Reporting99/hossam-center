@@ -39,6 +39,18 @@ function wrongLocaleBlogRedirects() {
 module.exports = {
   reactStrictMode: true,
 
+  // deployctl release contract (Reporting99/devops docs/nextjs-contract.md):
+  // standalone artifact whose BUILD_ID is the commit SHA.
+  output: 'standalone',
+  generateBuildId() {
+    return process.env.RELEASE_SHA ?? null; // null = Next's random id for local dev
+  },
+  // Pages read markdown from src/content at request time (src/utils/posts.js,
+  // legal pages); the standalone trace does not follow those fs paths.
+  outputFileTracingIncludes: {
+    '/**': ['./src/content/**/*'],
+  },
+
   trailingSlash: SITE.trailingSlash,
   basePath: SITE.basePathname !== '/' ? SITE.basePathname : '',
 
