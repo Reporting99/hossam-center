@@ -1,0 +1,140 @@
+name: CI
+
+# Public-safe CI for a PUBLIC repository: it cannot call the private
+# Reporting99/devops reusable workflows, so the release steps of
+# devops nextjs-release.yml@31d971d2 (v1.1.0) are inlined here.
+# No secrets, read-only token, no cross-repository access. deployctl pins
+# this file by blob sha and verifies the release-<sha> artifact against it.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event_name }}-${{ github.event_name == 'push' && github.sha || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install dependencies (lockfile must be in sync)
+        run: npm ci
+      - name: Production dependency audit (high and critical)
+        run: npm audit --omit=dev --audit-level=high
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test
+      - name: SEO invariants
+        run: |
+          npm run validate:seo
+          npm run validate:sitemap-url-invariants
+      - name: Build
+        env:
+          NODE_ENV: production
+        run: npm run build
+
+  release:
+    name: Release artifact
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        env:
+          NODE_ENV: production
+          RELEASE_SHA: ${{ github.sha }}
+        run: npm run build
+      - name: Verify standalone output and release identity
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          for p in .next/standalone/server.js .next/BUILD_ID; do
+            [[ -s "$p" ]] || { echo "::error::missing $p"; exit 1; }
+          done
+          [[ -d .next/static ]] || { echo "::error::missing .next/static"; exit 1; }
+          [[ "$(tr -d '\r\n' < .next/BUILD_ID)" == "$RELEASE_SHA" ]] || { echo "::error::BUILD_ID != RELEASE_SHA"; exit 1; }
+      - name: Package standalone release
+        id: package
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+          BASENAME: housam-honda
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/release-out"; rel="$out/tree"
+          name="${BASENAME}-${RELEASE_SHA}.tar.gz"
+          rm -rf "$out"; mkdir -p "$rel"
+          cp -RL --preserve=mode,timestamps .next/standalone/. "$rel/"
+          rm -rf "$rel/.next/static"; mkdir -p "$rel/.next/static"
+          cp -RL --preserve=mode,timestamps .next/static/. "$rel/.next/static/"
+          rm -rf "$rel/public"
+          if [[ -d public ]]; then mkdir -p "$rel/public"; cp -RL --preserve=mode,timestamps public/. "$rel/public/"; fi
+          install -m 644 .next/BUILD_ID "$rel/.next/BUILD_ID"
+          printf '%s\n' "$RELEASE_SHA" > "$rel/.release-sha"
+          rm -f "$rel/.env" "$rel"/.env.*
+          for f in src/content/blog src/content/terms src/content/privacy; do
+            [[ -d "$rel/$f" ]] || { echo "::error::runtime content $f missing from standalone trace"; exit 1; }
+          done
+          if find "$rel" \( -type l -o -type b -o -type c -o -type p -o -type s \) -print -quit | grep -q .; then
+            echo "::error::release tree contains links or special files"; exit 1
+          fi
+          node --check "$rel/server.js"
+          tar -czf "$out/$name" -C "$rel" .
+          gzip -t "$out/$name"
+          [[ "$(tar -xzOf "$out/$name" ./.release-sha | tr -d '\r\n')" == "$RELEASE_SHA" ]]
+          [[ "$(tar -xzOf "$out/$name" ./.next/BUILD_ID | tr -d '\r\n')" == "$RELEASE_SHA" ]]
+          ( cd "$out" && sha256sum "$name" > "$name.sha256" && sha256sum -c "$name.sha256" )
+          echo "artifact_path=$out/$name" >> "$GITHUB_OUTPUT"
+          echo "checksum_path=$out/$name.sha256" >> "$GITHUB_OUTPUT"
+      - name: Smoke the packaged server
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          d="$RUNNER_TEMP/smoke"; mkdir -p "$d"; tar -xzf "${{ steps.package.outputs.artifact_path }}" -C "$d"
+          ( cd "$d" && PORT=3999 HOSTNAME=127.0.0.1 node server.js > "$RUNNER_TEMP/smoke.log" 2>&1 & )
+          for _ in $(seq 30); do curl -fsS http://127.0.0.1:3999/api/health >/dev/null 2>&1 && break; sleep 1; done
+          curl -fsS http://127.0.0.1:3999/api/version | grep -q "$RELEASE_SHA"
+          for p in /ar /en /ar/terms /en/privacy /robots.txt /sitemap.xml; do
+            c=$(curl -s -o /dev/null -w '%{http_code}' -L "http://127.0.0.1:3999$p"); echo "$p $c"; [[ "$c" == 200 ]]
+          done
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ github.sha }}
+          path: |
+            ${{ steps.package.outputs.artifact_path }}
+            ${{ steps.package.outputs.checksum_path }}
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
